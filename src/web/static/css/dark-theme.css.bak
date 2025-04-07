@@ -1,0 +1,1509 @@
+/* Dark Theme Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+}
+
+.card {
+    border-radius: 0.8rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    margin-bottom: 1.8rem;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.card-header {
+    border-top-left-radius: 0.8rem !important;
+    border-top-right-radius: 0.8rem !important;
+    background: linear-gradient(45deg, #3a5dd9, #2d2a9d);
+    color: white;
+    font-weight: 600;
+    padding: 1.2rem 1.5rem;
+    border: none;
+}
+
+.card-body {
+    padding: 1.5rem;
+    background-color: #1e1e1e;
+}
+
+/* Fix for card title visibility */
+.card-title {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #c0c0c0;
+}
+
+/* Form styles */
+.form-control, .form-select {
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    background-color: #2d2d2d;
+    color: #ffffff;
+    height: auto;
+}
+
+/* Add styles for input placeholders */
+.form-control::placeholder {
+    color: #a0a0a0;
+    opacity: 1;
+}
+
+/* Add styles for select option text */
+.form-select option {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #3a5dd9;
+    box-shadow: 0 0 0 0.25rem rgba(58, 93, 217, 0.25);
+    background-color: #333;
+    color: #ffffff;
+}
+
+.form-label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #e0e0e0;
+    display: block;
+}
+
+/* Make sure input number arrows are visible */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+    background-color: #3a5dd9;
+}
+
+.btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #3a5dd9, #2d2a9d);
+    border: none;
+    box-shadow: 0 4px 12px rgba(58, 93, 217, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #2d2a9d, #280c80);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(58, 93, 217, 0.4);
+}
+
+/* Fix success button color */
+.btn-success, .bg-success {
+    background: linear-gradient(45deg, #0d9669, #077b55) !important;
+    border: none;
+}
+
+/* Portfolio results */
+.portfolio-summary {
+    background-color: #252525;
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    box-shadow: inset 0 0 10px rgba(58, 93, 217, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+#allocationDetails {
+    padding: 20px;
+    color: #e0e0e0;
+}
+
+.list-group-item {
+    border-radius: 0.5rem !important;
+    margin-bottom: 8px;
+    border: 1px solid #444;
+    padding: 0.8rem 1rem;
+    transition: all 0.2s ease;
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+.list-group-item:hover {
+    background-color: #333;
+    transform: translateX(5px);
+}
+
+.badge {
+    padding: 0.55em 0.8em;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+/* Add badge color adjustments for dark theme */
+.badge-primary {
+    background-color: #3a5dd9;
+    color: white;
+}
+
+.badge-success {
+    background-color: #0d9669;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #d97a18;
+    color: white;
+}
+
+.badge-danger {
+    background-color: #d93a3a;
+    color: white;
+}
+
+#topRecommendations {
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+#topRecommendations h6 {
+    color: #3a5dd9;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #444;
+}
+
+#loadingIndicator {
+    padding: 2rem 0;
+    color: #e0e0e0;
+}
+
+#loadingIndicator .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Chat interface */
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 380px;
+    background-color: #1e1e1e;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    height: 500px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+.chatbot-container.active {
+    display: flex !important;
+    z-index: 1002;
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #3a5dd9, #2d2a9d);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 28px;
+    box-shadow: 0 5px 15px rgba(58, 93, 217, 0.3);
+    z-index: 1001;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.chatbot-toggle:hover {
+    background: linear-gradient(45deg, #2d2a9d, #280c80);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(58, 93, 217, 0.4);
+}
+
+.chatbot-toggle i {
+    font-size: 1.2rem;
+}
+
+.chatbot-header {
+    background: linear-gradient(45deg, #3a5dd9, #2d2a9d);
+    color: white;
+    padding: 15px 20px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.chatbot-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 60px); /* Subtract header height */
+    overflow: hidden;
+    background-color: #252525;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+}
+
+.chat-input {
+    display: flex;
+    padding: 12px 15px;
+    border-top: 1px solid #444;
+    background-color: #1e1e1e;
+}
+
+.chat-input textarea {
+    flex: 1;
+    resize: none;
+    margin-right: 10px;
+    border-radius: 12px;
+    border: 1px solid #444;
+    padding: 12px;
+    font-size: 0.95rem;
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+.chat-input textarea:focus {
+    outline: none;
+    border-color: #3a5dd9;
+    box-shadow: 0 0 0 2px rgba(58, 93, 217, 0.25);
+}
+
+.chat-input button {
+    background: linear-gradient(45deg, #3a5dd9, #2d2a9d);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chat-input button:hover {
+    background: linear-gradient(45deg, #2d2a9d, #280c80);
+}
+
+.message {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    animation: fadeInUp 0.3s ease-in-out;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.assistant {
+    justify-content: flex-start;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message.user .message-content {
+    background-color: #3a5dd9;
+    color: white;
+    border-top-right-radius: 0;
+}
+
+.message.assistant .message-content {
+    background-color: #333;
+    color: #e0e0e0;
+    border-top-left-radius: 0;
+    border: 1px solid #444;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.typing-indicator {
+    padding: 8px 15px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 3px;
+    animation: pulse 1.2s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+.disclaimer {
+    background-color: #252525;
+    border-left: 4px solid #3a5dd9;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+    color: #b0b0b0;
+    border-radius: 0 5px 5px 0;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.disclaimer::before {
+    content: "⚠️";
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #252525;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #3a5dd9;
+}
+
+.disclaimer p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.suggestion-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.suggestion-btn {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-btn:hover {
+    background-color: #3a5dd9;
+    color: white;
+    border-color: #3a5dd9;
+}
+
+.message.assistant.suggestions .message-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.message.assistant.suggestions .message-content p {
+    margin-bottom: 10px;
+    color: #b0b0b0;
+    font-style: italic;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0 rgba(58, 93, 217, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(58, 93, 217, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(58, 93, 217, 0);
+    }
+}
+
+.highlight-pulse {
+    animation: pulse-animation 2s infinite;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto !important;
+    background-color: #1e1e1e;
+}
+
+#detailedView {
+    margin-top: 2rem;
+    display: none;
+}
+
+.table {
+    color: #e0e0e0;
+    border-color: #444;
+    width: 100%;
+    margin-bottom: 1rem;
+    vertical-align: top;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    border-bottom: 2px solid #444;
+    padding: 0.75rem;
+    text-align: left;
+    background-color: #252525;
+    color: #b0b0b0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #252525;
+}
+
+.table td {
+    padding: 0.75rem;
+    border-top: 1px solid #444;
+    vertical-align: middle;
+}
+
+.dashboard-section {
+    padding: 20px;
+    border-radius: 0.8rem;
+    background-color: #1e1e1e;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.dashboard-section h5 {
+    color: #b0b0b0;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid #444;
+    display: flex;
+    align-items: center;
+}
+
+#showDetailsBtn {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#showDetailsBtn:hover {
+    background-color: #3a5dd9;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(58, 93, 217, 0.3);
+}
+
+#showDetailsBtn i {
+    transition: transform 0.3s ease;
+}
+
+#showDetailsBtn:hover i {
+    transform: rotate(90deg);
+}
+
+/* Navbar dark theme */
+.navbar {
+    background-color: #1e1e1e !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.navbar-light .navbar-brand {
+    color: #ffffff !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #b0b0b0 !important;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+    color: #3a5dd9 !important;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: rgba(255,255,255,0.1);
+}
+
+.navbar-light .navbar-toggler-icon {
+    filter: invert(0.8);
+}
+
+/* Hero section dark theme */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%) !important;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.2rem;
+    }
+    
+    .chatbot-container {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+    
+    #chatMessages {
+        padding: 15px;
+    }
+    
+    .message {
+        margin-bottom: 10px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Portfolio summary dark theme */
+#portfolioSummary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+    #portfolioSummary {
+        grid-template-columns: minmax(200px, auto) 1fr;
+    }
+}
+
+.summary-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.summary-details p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.summary-details p strong {
+    color: #b0b0b0;
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: 150px;
+}
+
+.profile-badge {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.profile-badge.info {
+    background-color: #1e3a5c;
+    color: #8bbef8;
+}
+
+.profile-badge.warning {
+    background-color: #5e4a1a;
+    color: #ffd66e;
+}
+
+.profile-badge.danger {
+    background-color: #5a1e1e;
+    color: #ff7f7f;
+}
+
+.summary-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.summary-details p {
+    margin-bottom: 0.5rem;
+    color: #b0b0b0;
+}
+
+.allocation-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.allocation-item {
+    background-color: #252525;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.allocation-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    background-color: #2a2a2a;
+}
+
+.allocation-label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+.asset-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.asset-icon.primary {
+    background-color: #3a5dd9;
+}
+
+.asset-icon.info {
+    background-color: #2d6ca2;
+}
+
+.asset-icon.success {
+    background-color: #176d4a;
+}
+
+.asset-icon.warning {
+    background-color: #b5890b;
+}
+
+.asset-icon.danger {
+    background-color: #a42e2e;
+}
+
+.asset-icon.purple {
+    background-color: #6938b3;
+}
+
+.allocation-value {
+    text-align: right;
+}
+
+.allocation-value .amount {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+}
+
+.allocation-value .percentage {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    margin-top: 5px;
+}
+
+.recommendations-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.recommendation-category {
+    background-color: #252525;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.recommendation-category h6 {
+    color: #b0b0b0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+    display: flex;
+    align-items: center;
+}
+
+.recommendation-category h6 i {
+    margin-right: 8px;
+}
+
+.recommendation-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.recommendation-item {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.recommendation-item:hover {
+    background-color: #333;
+    transform: translateX(5px);
+}
+
+.recommendation-item .symbol {
+    font-weight: 600;
+    color: #3a5dd9;
+}
+
+.recommendation-item .amount {
+    color: #b0b0b0;
+    font-weight: 500;
+}
+
+.recommendation-text {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #b0b0b0;
+}
+
+/* Progress bar styling */
+.progress {
+    background-color: #2d2d2d;
+    border-radius: 0.5rem;
+    height: 25px;
+}
+
+.progress-bar {
+    border-radius: 0.5rem;
+}
+
+/* Feature icons in dark mode */
+.feature-icon i {
+    color: #3a5dd9 !important;
+}
+
+/* Fix font colors in dark theme for better readability */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+}
+
+/* Footer styling for dark theme */
+footer.bg-dark {
+    background-color: #151515 !important;
+    color: #b0b0b0;
+}
+
+/* Table styling for dark theme */
+.table {
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+.table thead th {
+    background-color: #252525;
+    color: #e0e0e0;
+    border-bottom: 2px solid #444;
+}
+
+.table tbody tr {
+    border-top: 1px solid #444;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #252525;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #1e1e1e;
+}
+
+/* Visualization elements */
+canvas {
+    background-color: #1e1e1e;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+#theme-toggle:hover {
+    background-color: #3a5dd9;
+    color: white;
+    border-color: #3a5dd9;
+}
+
+/* Improve the detailed view button */
+#showDetailsBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 2px solid #3a5dd9;
+    color: #3a5dd9;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+}
+
+#showDetailsBtn:hover {
+    background-color: #3a5dd9;
+    color: white;
+}
+
+/* Improve spacing between sections */
+.dashboard-section {
+    margin-bottom: 30px;
+}
+
+/* Format the portfolio summary section */
+#portfolioSummary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+    #portfolioSummary {
+        grid-template-columns: minmax(200px, auto) 1fr;
+    }
+}
+
+/* Better styling for investment amount and details */
+.investment-amount {
+    display: flex;
+    justify-content: space-between;
+    background-color: #252525;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.investment-amount strong {
+    color: #b0b0b0;
+}
+
+.investment-amount span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Style dropdown fields to look more interactive */
+.form-select:hover {
+    border-color: #3a5dd9;
+    cursor: pointer;
+}
+
+.form-select:focus {
+    border-color: #3a5dd9;
+    box-shadow: 0 0 0 0.25rem rgba(58, 93, 217, 0.25);
+    background-color: #333;
+    color: #ffffff;
+}
+
+/* Add icons to form-select elements */
+.form-select-container {
+    position: relative;
+}
+
+.form-select-container::after {
+    content: "\f107"; /* Font Awesome dropdown icon */
+    font-family: "bootstrap-icons";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3a5dd9;
+    pointer-events: none;
+}
+
+/* Time horizon, risk tolerance and goals sections */
+.investment-options-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.investment-option {
+    background-color: #252525;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.investment-option label {
+    color: #b0b0b0;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.investment-option select {
+    flex: 1;
+}
+
+/* Improve form select styling with clear indicators */
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffffff' viewBox='0 0 16 16'%3e%3cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem !important;
+}
+
+.form-select:focus {
+    border: 2px solid #3a5dd9;
+    box-shadow: 0 0 0 0.25rem rgba(58, 93, 217, 0.25);
+    outline: none;
+}
+
+/* Improved combobox container */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: calc(50% + 10px);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #3a5dd9;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Fix text spacing issues in profile section */
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #252525;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.profile-info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+}
+
+.profile-info-item:last-child {
+    border-bottom: none;
+}
+
+.profile-info-label {
+    font-weight: 500;
+    color: #b0b0b0;
+}
+
+.profile-info-value {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Fix the investment profile display */
+#investmentProfile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+    #investmentProfile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-card {
+    background-color: #252525;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-card-label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.profile-card-value {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Fix the investment breakdown section */
+.investment-breakdown {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.investment-breakdown h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+    font-size: 1.3rem;
+}
+
+.allocation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.allocation-card {
+    background-color: #252525;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.allocation-card:hover {
+    transform: translateY(-3px);
+    background-color: #2a2a2a;
+}
+
+.allocation-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.allocation-card-details {
+    flex-grow: 1;
+}
+
+.allocation-card-asset {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.allocation-card-percentage {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+}
+
+.allocation-card-amount {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+/* Fix the combo boxes display in the form */
+.investment-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.investment-option-group {
+    background-color: #252525;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.investment-option-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+    font-weight: 500;
+}
+
+.investment-option-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #444;
+    position: relative;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233a5dd9' viewBox='0 0 16 16'%3e%3cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
+}
+
+/* Spin animation for loading indicator */
+.spin {
+    animation: spin 1s infinite linear;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Portfolio result styles */
+.summary-card {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.summary-card .card-header {
+    background-color: #252525;
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+}
+
+.summary-card .card-header h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.25rem;
+}
+
+.summary-card .card-body {
+    padding: 20px;
+}
+
+.summary-item {
+    margin-bottom: 15px;
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    margin-bottom: 5px;
+}
+
+.summary-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Allocation breakdown styles */
+.allocation-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.allocation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #252525;
+    border-radius: 6px;
+}
+
+.allocation-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.allocation-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.allocation-percentage {
+    font-weight: 600;
+}
+
+/* Asset color classes */
+.color-stocks {
+    background-color: #4361ee;
+}
+
+.color-bonds {
+    background-color: #3a0ca3;
+}
+
+.color-crypto {
+    background-color: #7209b7;
+}
+
+.color-gold {
+    background-color: #f72585;
+}
+
+.color-cash {
+    background-color: #4cc9f0;
+}
+
+.color-real-estate {
+    background-color: #ffca3a;
+}
+
+.color-alternatives {
+    background-color: #ff7900;
+}
+
+.color-default {
+    background-color: #6c757d;
+}
+
+/* Recommendation styles */
+.recommendation-category {
+    margin-bottom: 30px;
+}
+
+.recommendation-category h4 {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+    color: #e0e0e0;
+}
+
+.recommendation-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.recommendation-item {
+    background-color: #252525;
+    border-radius: 8px;
+    padding: 15px;
+    transition: transform 0.2s;
+}
+
+.recommendation-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.recommendation-header .ticker {
+    font-weight: 600;
+    color: #4361ee;
+}
+
+.recommendation-header .allocation {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: #4361ee;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.recommendation-item .name {
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.recommendation-item .expected-return {
+    color: #b0b0b0;
+    font-size: 0.85rem;
+}
+
+/* Modal backdrop for detailed view */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+/* Make sure inputs are visible in dark theme */
+.form-control, .form-select {
+    color: #ffffff;
+}
+
+.form-control::placeholder {
+    color: #a0a0a0;
+}
+
+.form-select option {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+/* Add hover state for buttons */
+.btn-primary:hover {
+    background-color: #4361ee;
+    border-color: #4361ee;
+}
+
+.btn-outline-primary:hover {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: #4361ee;
+} 

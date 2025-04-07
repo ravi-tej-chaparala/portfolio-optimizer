@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Portfolio Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <!-- Minimalist Header -->
+    <header class="app-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-pie-chart-fill me-2 header-icon"></i>
+                    <h1 class="app-title mb-0">Portfolio Generator</h1>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="badge project-badge">Academic Project</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4">
+        <div class="row g-4">
+            <!-- Input Column -->
+            <div class="col-lg-5">
+                <!-- Portfolio Generator Card -->
+                <div class="card app-card mb-4">
+                    <div class="card-header app-card-header">
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon-wrapper">
+                                <i class="bi bi-sliders"></i>
+                            </div>
+                            <h2 class="card-title">Portfolio Parameters</h2>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="investmentForm">
+                            <div class="form-group mb-4">
+                                <label for="investmentAmount" class="form-label">Investment Amount</label>
+                                <div class="input-group app-input-group">
+                                    <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                                    <input type="number" class="form-control" id="investmentAmount" placeholder="10000"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="annualIncome" class="form-label">Annual Income</label>
+                                <div class="input-group app-input-group">
+                                    <span class="input-group-text"><i class="bi bi-cash-stack"></i></span>
+                                    <input type="number" class="form-control" id="annualIncome" placeholder="75000"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="investmentGoal" class="form-label">Investment Goal</label>
+                                <div class="input-group app-input-group">
+                                    <span class="input-group-text"><i class="bi bi-bullseye"></i></span>
+                                    <select class="form-select" id="investmentGoal" required>
+                                        <option value="" selected disabled>Select a goal</option>
+                                        <option value="retirement">Retirement</option>
+                                        <option value="education">Education</option>
+                                        <option value="house">Home Purchase</option>
+                                        <option value="wealth">Wealth Growth</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="riskTolerance" class="form-label">Risk Tolerance</label>
+                                <div class="input-group app-input-group">
+                                    <span class="input-group-text"><i class="bi bi-shield"></i></span>
+                                    <select class="form-select" id="riskTolerance" required>
+                                        <option value="" selected disabled>Select risk level</option>
+                                        <option value="low">Low (Conservative)</option>
+                                        <option value="medium">Medium (Balanced)</option>
+                                        <option value="high">High (Aggressive)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="timeHorizon" class="form-label">Time Horizon</label>
+                                <div class="input-group app-input-group">
+                                    <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                    <select class="form-select" id="timeHorizon" required>
+                                        <option value="" selected disabled>Select time period</option>
+                                        <option value="short">Short Term (0-3 years)</option>
+                                        <option value="medium">Medium Term (3-7 years)</option>
+                                        <option value="long">Long Term (7+ years)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-generate w-100">
+                                <span class="btn-text">Generate Portfolio</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Project Information Card -->
+                <div class="card app-card info-card" id="about">
+                    <div class="card-header app-card-header">
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon-wrapper">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <h2 class="card-title">About</h2>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="info-tabs">
+                            <div class="nav nav-tabs" id="info-tab" role="tablist">
+                                <button class="nav-link active" id="model-tab" data-bs-toggle="tab"
+                                    data-bs-target="#model" type="button">
+                                    <i class="bi bi-cpu"></i>
+                                    <span>Model</span>
+                                </button>
+                                <button class="nav-link" id="tech-tab" data-bs-toggle="tab" data-bs-target="#tech"
+                                    type="button">
+                                    <i class="bi bi-code-slash"></i>
+                                    <span>Tech</span>
+                                </button>
+                                <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data"
+                                    type="button">
+                                    <i class="bi bi-database"></i>
+                                    <span>Data</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-content p-4" id="info-tab-content">
+                            <div class="tab-pane fade show active" id="model" role="tabpanel">
+                                <p>This academic project uses quantitative analysis to generate investment
+                                    recommendations based on user input parameters.</p>
+                                <p>The system is optimized for various risk profiles and investment goals, considering
+                                    historical market data.</p>
+                            </div>
+                            <div class="tab-pane fade" id="tech" role="tabpanel">
+                                <p>Backend: Python with Flask</p>
+                                <p>Frontend: Bootstrap, Chart.js</p>
+                                <p>Portfolio algorithms use asset allocation principles and quantitative methods.</p>
+                            </div>
+                            <div class="tab-pane fade" id="data" role="tabpanel">
+                                <p>Data includes historical market returns, risk metrics, and correlation coefficients.
+                                </p>
+                                <p class="mb-0">Educational purposes only, not financial advice.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Column -->
+            <div class="col-lg-7">
+                <!-- Initial State -->
+                <div class="card app-card results-card" id="initialState">
+                    <div class="card-header app-card-header">
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon-wrapper">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h2 class="card-title">Portfolio Visualizer</h2>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="initial-state-content">
+                            <div class="feature-rings">
+                                <div class="feature-ring">
+                                    <div class="ring-inner">
+                                        <i class="bi bi-clock-history"></i>
+                                    </div>
+                                    <span>Time-Based</span>
+                                </div>
+                                <div class="feature-ring">
+                                    <div class="ring-inner">
+                                        <i class="bi bi-shield-check"></i>
+                                    </div>
+                                    <span>Risk-Aware</span>
+                                </div>
+                                <div class="feature-ring">
+                                    <div class="ring-inner">
+                                        <i class="bi bi-graph-up"></i>
+                                    </div>
+                                    <span>Growth-Focused</span>
+                                </div>
+                            </div>
+
+                            <div class="empty-state-message">
+                                <p>Fill in the form to generate your personalized investment portfolio</p>
+                                <div class="direction-pointer">
+                                    <i class="bi bi-arrow-left"></i>
+                                    <span>Complete the parameters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results State (Initially Hidden) -->
+                <div class="card app-card results-card d-none" id="portfolioResults">
+                    <div class="card-header app-card-header">
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon-wrapper">
+                                <i class="bi bi-pie-chart-fill"></i>
+                            </div>
+                            <h2 class="card-title">Your Portfolio</h2>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Investor Profile -->
+                        <div class="section-container mb-4">
+                            <h3 class="section-title"><i class="bi bi-person-badge"></i> Investor Profile</h3>
+                            <div class="profile-grid">
+                                <div class="profile-item">
+                                    <span class="profile-label">Investment</span>
+                                    <span class="profile-value" id="profile-amount">$10,000</span>
+                                </div>
+                                <div class="profile-item">
+                                    <span class="profile-label">Goal</span>
+                                    <span class="profile-value" id="profile-goal">Retirement</span>
+                                </div>
+                                <div class="profile-item">
+                                    <span class="profile-label">Time Horizon</span>
+                                    <span class="profile-value" id="profile-time">Long Term</span>
+                                </div>
+                            </div>
+
+                            <!-- Risk Meter -->
+                            <div class="risk-meter-container mt-4">
+                                <div class="risk-header">
+                                    <span>Risk Profile</span>
+                                    <span class="risk-badge" id="risk-level-badge">Moderate</span>
+                                </div>
+                                <div class="risk-meter">
+                                    <div class="risk-meter-fill" id="risk-meter-fill"></div>
+                                </div>
+                                <div class="risk-labels">
+                                    <span>Conservative</span>
+                                    <span>Moderate</span>
+                                    <span>Aggressive</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Asset Allocation -->
+                        <div class="section-container mb-4">
+                            <h3 class="section-title"><i class="bi bi-pie-chart"></i> Asset Allocation</h3>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="chart-container">
+                                        <canvas id="allocationChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="allocation-grid" id="allocation-breakdown">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Investment Recommendations -->
+                        <div class="section-container">
+                            <h3 class="section-title"><i class="bi bi-star"></i> Recommended Investments</h3>
+                            <div class="recommendations-container" id="investment-recommendations">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="action-buttons mt-4">
+                                <button class="btn btn-action" id="viewDetailsBtn">
+                                    <i class="bi bi-list-ul"></i>
+                                    <span>View Detailed Recommendations</span>
+                                </button>
+                                <button class="btn btn-action outline" id="newSimulationBtn">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                    <span>New Simulation</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer py-3">
+        <div class="container">
+            <div class="text-center">
+                <p class="mb-0 small">Portfolio Generator | Academic Project | Not Financial Advice</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Interface -->
+    <div class="chatbot-container d-none" id="chatbot-container">
+        <div class="chatbot-header" id="chatbot-header">
+            <div class="chatbot-title">
+                <i class="bi bi-robot me-2"></i>
+                <span>Investment Assistant</span>
+            </div>
+            <div class="chatbot-controls">
+                <button class="chatbot-minimize-btn" id="close-chat">
+                    <i class="bi bi-dash-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="chatbot-messages" id="chatbot-messages">
+                <!-- Messages will be added dynamically -->
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="message-input" placeholder="Ask a question...">
+                <button id="send-message">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button class="chatbot-toggle" id="chatbot-toggle">
+        <i class="bi bi-chat-dots-fill"></i>
+    </button>
+
+    <!-- Machine Learning Processing Modal -->
+    <div class="modal fade" id="processingModal" tabindex="-1" aria-labelledby="processingModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="processingModalLabel">Processing Investment Data</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="processing-spinner mb-3">
+                            <span class="spinner-inner"></span>
+                        </div>
+                        <h5 class="processing-title">Generating Portfolio</h5>
+                        <p class="processing-description">Our system is analyzing market data and optimizing allocations
+                            based on your parameters.</p>
+                    </div>
+
+                    <div class="processing-status-container">
+                        <p id="processing-status" class="processing-status">Initializing portfolio generation...</p>
+                        <div class="progress mb-3">
+                            <div id="processingProgress" class="progress-bar" role="progressbar" style="width: 0%"
+                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Recommendations Modal -->
+    <div class="modal fade" id="recommendationsModal" tabindex="-1" aria-labelledby="recommendationsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recommendationsModalLabel">Detailed Portfolio Recommendations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="detailed-recommendations">
+                        <!-- Investor Profile Summary -->
+                        <div class="detail-section mb-4">
+                            <h4 class="detail-title">Investor Profile</h4>
+                            <div class="detail-content" id="detailed-profile">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Investment Strategy -->
+                        <div class="detail-section mb-4">
+                            <h4 class="detail-title">Investment Strategy</h4>
+                            <div class="detail-content" id="detailed-strategy">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Detailed Asset Allocation -->
+                        <div class="detail-section mb-4">
+                            <h4 class="detail-title">Asset Allocation Breakdown</h4>
+                            <div class="detail-content" id="detailed-allocation">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Recommended Securities -->
+                        <div class="detail-section mb-4">
+                            <h4 class="detail-title">Recommended Securities</h4>
+                            <div class="detail-content" id="detailed-etfs">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Market Outlook -->
+                        <div class="detail-section mb-4">
+                            <h4 class="detail-title">Market Outlook</h4>
+                            <div class="detail-content" id="detailed-outlook">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Rebalancing Strategy -->
+                        <div class="detail-section mb-4">
+                            <h4 class="detail-title">Rebalancing Strategy</h4>
+                            <div class="detail-content" id="detailed-rebalancing">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Performance Projections -->
+                        <div class="detail-section">
+                            <h4 class="detail-title">Performance Projections</h4>
+                            <div class="detail-content" id="detailed-projections">
+                                <!-- Will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
