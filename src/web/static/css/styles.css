@@ -43,7 +43,12 @@ main {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 1rem;
@@ -370,6 +375,7 @@ p {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -402,9 +408,12 @@ p {
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(-10px);
     }
@@ -632,7 +641,7 @@ p {
 }
 
 .shake-animation {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
 }
 
 /* Animations */
@@ -641,6 +650,7 @@ p {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -648,13 +658,24 @@ p {
 }
 
 @keyframes shake {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(0);
     }
-    10%, 30%, 50%, 70%, 90% {
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
         transform: translateX(-5px);
     }
-    20%, 40%, 60%, 80% {
+
+    20%,
+    40%,
+    60%,
+    80% {
         transform: translateX(5px);
     }
 }
@@ -664,19 +685,24 @@ p {
         opacity: 0;
         transform: scale3d(0.3, 0.3, 0.3);
     }
+
     20% {
         transform: scale3d(1.1, 1.1, 1.1);
     }
+
     40% {
         transform: scale3d(0.9, 0.9, 0.9);
     }
+
     60% {
         opacity: 1;
         transform: scale3d(1.03, 1.03, 1.03);
     }
+
     80% {
         transform: scale3d(0.97, 0.97, 0.97);
     }
+
     to {
         opacity: 1;
         transform: scale3d(1, 1, 1);
@@ -688,33 +714,34 @@ p {
     .feature-rings {
         gap: 1rem;
     }
-    
+
     .ring-inner {
         width: 70px;
         height: 70px;
     }
-    
+
     .ring-inner i {
         font-size: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
+
     .profile-grid,
     .allocation-grid,
     .recommendations-container {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .feature-rings {
         flex-direction: column;
         gap: 1.5rem;
     }
-    
+
     .feature-ring {
         flex-direction: row;
     }
-    
+
     .ring-inner {
         width: 60px;
         height: 60px;
@@ -722,19 +749,20 @@ p {
 }
 
 @media (max-width: 576px) {
+
     .profile-grid,
     .allocation-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .recommendations-container {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .action-buttons {
         flex-direction: column;
     }
-    
+
     .btn-action {
         width: 100%;
     }
@@ -776,7 +804,7 @@ p {
     justify-content: center;
     cursor: pointer;
     z-index: 1001;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
@@ -853,6 +881,7 @@ p {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -968,7 +997,7 @@ p {
     height: 60px;
     border-radius: 50%;
     margin: 0 auto;
-    border: 3px solid rgba(255,255,255,0.2);
+    border: 3px solid rgba(255, 255, 255, 0.2);
     border-top-color: var(--primary-color);
     animation: spin 1s infinite linear;
     position: relative;
@@ -988,8 +1017,13 @@ p {
 }
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .processing-title {
@@ -1226,11 +1260,11 @@ p {
         width: 300px;
         height: 400px;
     }
-    
+
     .detailed-recommendations {
         padding: 0;
     }
-    
+
     .outlook-container {
         grid-template-columns: 1fr;
     }
@@ -1241,7 +1275,7 @@ p {
         width: calc(100% - 40px);
         height: 350px;
     }
-    
+
     .chatbot-toggle {
         width: 45px;
         height: 45px;
@@ -1320,7 +1354,8 @@ table td {
     margin-bottom: 1rem;
 }
 
-.etf-table th, .etf-table td {
+.etf-table th,
+.etf-table td {
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
@@ -1419,4 +1454,149 @@ table td {
 .outlook-trend {
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+.securities-container {
+    margin-bottom: 1.5rem;
+}
+
+.asset-class-title {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.asset-class-title .etf-type-badge {
+    font-size: 0.7rem;
+}
+
+.etf-weight {
+    text-align: right;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Fix ETF table styles */
+.etf-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.etf-table th,
+.etf-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.etf-table th {
+    color: var(--text-primary);
+    font-weight: 600;
+    background-color: var(--card-header);
+}
+
+.etf-ticker {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.etf-name {
+    color: var(--text-secondary);
+}
+
+.etf-allocation {
+    text-align: right;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.strategy-wrapper,
+.rebalancing-wrapper {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.strategy-card {
+    background-color: var(--card-header);
+    border-radius: var(--border-radius-sm);
+    padding: 1.25rem;
+    margin-bottom: 0;
+    box-shadow: var(--shadow-xs);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.strategy-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.strategy-card h5 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.strategy-card h5 i {
+    color: var(--primary-color);
+}
+
+.strategy-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.strategy-card p:last-child {
+    margin-bottom: 0;
+}
+
+.strategy-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.strategy-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.strategy-list li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+.strategy-list li strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+
+    .strategy-wrapper,
+    .rebalancing-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
