@@ -56,17 +56,12 @@ API_SETTINGS = {
     'yfinance': {
         'max_requests_per_hour': 60,
         'request_delay': 1.0,
-    },
-    'huggingface': {
-        'model': 'mistralai/Mistral-7B-Instruct-v0.2',
-        'max_tokens': 500,
-        'temperature': 0.7
     }
 }
 
 # Cache settings
 CACHE_SETTINGS = {
-    'ttl': 86400,  # Time to live in seconds (24 hours)
+    'ttl': 2592000,  # Time to live in seconds (30 days)
     'force_refresh': False
 }
 

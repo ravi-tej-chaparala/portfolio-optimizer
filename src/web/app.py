@@ -5,10 +5,10 @@ import traceback
 import logging
 from datetime import datetime
 from dotenv import load_dotenv
-from huggingface_hub import InferenceClient
 import json
 import numpy as np
 import re
+import openai
 
 # Add the parent directory to the path to allow imports from other modules
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,23 +77,24 @@ def init_portfolio_model():
         return None
 
 
-def init_hf_client():
-    """Initialize the Hugging Face client."""
+def init_openai_client():
+    """Initialize the OpenAI client."""
     try:
-        hf_token = os.getenv("HUGGINGFACE_API_KEY")
+        openai_api_key = os.getenv("OPENAI_API_KEY")
         logger.info(
-            f"Loading Hugging Face API key: {hf_token[:5] if hf_token else 'None'}..."
+            f"Loading OpenAI API key: {openai_api_key[:5] if openai_api_key else 'None'}..."
         )
 
-        if hf_token and hf_token != "your_huggingface_api_key_here":
-            client = InferenceClient(token=hf_token)
-            logger.info("Hugging Face client initialized successfully")
-            return client
+        if openai_api_key and openai_api_key != "your_openai_api_key_here":
+            # Set the API key for the client
+            openai.api_key = openai_api_key
+            logger.info("OpenAI client initialized successfully")
+            return True
         else:
-            logger.warning("Hugging Face API key not configured")
+            logger.warning("OpenAI API key not configured")
             return None
     except Exception as e:
-        logger.error(f"Failed to initialize Hugging Face client: {str(e)}")
+        logger.error(f"Failed to initialize OpenAI client: {str(e)}")
         logger.error(traceback.format_exc())
         return None
 
@@ -113,7 +114,7 @@ def init_data_service():
 
 # Initialize services
 portfolio_model = init_portfolio_model()
-hf_client = init_hf_client()
+openai_client = init_openai_client()
 data_service = init_data_service()
 
 # Initialize Flask app
@@ -297,11 +298,12 @@ def chat():
                 }
             ), 400
 
-        if not hf_client:
-            logger.error("Hugging Face client not initialized")
+        # Check if OpenAI client is available
+        if not openai_client:
+            logger.error("OpenAI client is not initialized")
             return jsonify(
                 {
-                    "response": "The Hugging Face API key is not configured. Please add your API key to the .env file."
+                    "response": "OpenAI is not configured. Please add your OpenAI API key to the .env file."
                 }
             ), 400
 
@@ -548,7 +550,7 @@ If they're asking about their specific portfolio, explain that they need to gene
 
 def generate_chat_response(prompt_or_context):
     """
-    Generate a response using the Hugging Face client.
+    Generate a response using OpenAI.
 
     Args:
         prompt_or_context: Either a string prompt or a context object with
@@ -557,14 +559,12 @@ def generate_chat_response(prompt_or_context):
     Returns:
         str: The generated response
     """
-    logger.info("Generating response using Hugging Face InferenceClient")
-    try:
-        # Handle both string prompts and context objects
-        if isinstance(prompt_or_context, dict):
-            # Format the context object into a prompt
-            context = prompt_or_context
-            prompt = f"""You are a helpful investment advisor assistant. 
-            
+    # Handle both string prompts and context objects
+    if isinstance(prompt_or_context, dict):
+        # Format the context object into a prompt
+        context = prompt_or_context
+        prompt = f"""You are a helpful investment advisor assistant. 
+        
 INSTRUCTION: {context.get("instruction", "Provide investment advice.")}
 
 USER MESSAGE: {context.get("user_message", "")}
@@ -579,38 +579,41 @@ Provide a clear, accurate, and detailed response that directly addresses the use
 Explain portfolio concepts thoroughly based on the specific data provided.
 Do not use template responses - analyze the provided information to give custom explanations.
 """
-        else:
-            # Use the string prompt directly
-            prompt = prompt_or_context
-
-        # Generate the response
-        response = hf_client.text_generation(
-            prompt,
-            model="mistralai/Mistral-7B-Instruct-v0.2",
-            max_new_tokens=800,  # Increased for more detailed responses
-            temperature=0.7,
-            top_p=0.95,
-            repetition_penalty=1.1,
-        )
-
-        # Clean up the response
-        response_text = response.replace(prompt, "").strip()
-
-        # Remove any response formatting patterns that might come from the model
-        response_text = re.sub(
-            r"^(Response:|Answer:|Assistant:|AI:)", "", response_text
-        ).strip()
-
-        if not response_text:
-            response_text = "I apologize, but I couldn't generate a proper response about your portfolio. Please try asking in a different way."
-
-        logger.info(f"Generated response: {response_text[:50]}...")
-        return response_text
-
-    except Exception as e:
-        logger.error(f"Error during API request: {str(e)}")
-        logger.error(f"Traceback: {traceback.format_exc()}")
-        return "I'm having trouble analyzing your portfolio right now. Please try again later."
+    else:
+        # Use the string prompt directly
+        prompt = prompt_or_context
+    
+    # Generate response with OpenAI
+    if openai_client:
+        logger.info("Generating response using OpenAI")
+        try:
+            response = openai.chat.completions.create(
+                model="gpt-3.5-turbo",  # You can use gpt-4 if you have access
+                messages=[
+                    {"role": "system", "content": "You are a helpful investment advisor assistant."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=800,
+                temperature=0.7,
+            )
+            
+            response_text = response.choices[0].message.content.strip()
+            
+            if not response_text:
+                response_text = "I apologize, but I couldn't generate a proper response about your portfolio. Please try asking in a different way."
+                
+            logger.info(f"Generated response: {response_text[:50]}...")
+            return response_text
+            
+        except Exception as e:
+            logger.error(f"Error during OpenAI API request: {str(e)}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return "I'm having trouble analyzing your portfolio right now. Please try again later."
+    
+    # If no client is available
+    else:
+        logger.error("OpenAI client not available")
+        return "I'm unable to analyze your portfolio as OpenAI is not configured. Please check API configuration."
 
 
 if __name__ == "__main__":

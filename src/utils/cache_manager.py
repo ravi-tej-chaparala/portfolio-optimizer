@@ -22,7 +22,7 @@ except ImportError:
     # Fallback settings if import fails
     CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'cache')
     os.makedirs(CACHE_DIR, exist_ok=True)
-    CACHE_SETTINGS = {'ttl': 86400, 'force_refresh': False}
+    CACHE_SETTINGS = {'ttl': 2592000, 'force_refresh': False}
 
 logger = logging.getLogger(__name__)
 
@@ -39,10 +39,10 @@ class CacheManager:
             cache_name (str): Name of the cache file (without extension)
         """
         self.cache_file = os.path.join(CACHE_DIR, f"{cache_name}_cache.json")
-        self.ttl = CACHE_SETTINGS.get('ttl', 86400)  # Default to 24 hours
+        self.ttl = CACHE_SETTINGS.get('ttl', 2592000)  # Default to 30 days
         self.force_refresh = CACHE_SETTINGS.get('force_refresh', False)
-        # Maximum cache age is always one week (604800 seconds)
-        self.max_cache_age = 604800
+        # Maximum cache age is always 30 days (2592000 seconds)
+        self.max_cache_age = 2592000
         self.cache = self._load_cache()
         
     def _load_cache(self) -> Dict:
@@ -99,9 +99,9 @@ class CacheManager:
             # Check entry timestamp if available 
             if isinstance(entry, dict) and 'timestamp' in entry and 'value' in entry:
                 entry_time = datetime.fromtimestamp(entry['timestamp'])
-                # Check if entry is older than one week
+                # Check if entry is older than 30 days
                 if datetime.now() - entry_time > timedelta(seconds=self.max_cache_age):
-                    logger.info(f"Cache entry for {key} is older than one week, will refresh")
+                    logger.info(f"Cache entry for {key} is older than 30 days, will refresh")
                     return None
                 value = entry['value']
             else:

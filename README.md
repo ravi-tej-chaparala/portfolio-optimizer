@@ -17,7 +17,7 @@ src/
 ├── config/           # Configuration settings
 ├── models/           # Portfolio generation models
 ├── utils/            # Utility modules
-│   ├── cache_manager.py      # Caching with entry-level expiration (1 week max)
+│   ├── cache_manager.py      # Caching with entry-level expiration (30 days max)
 │   └── data_service.py       # Financial data service with retry logic
 ├── web/              # Web application
 │   ├── app.py        # Flask application with API endpoints
@@ -26,29 +26,32 @@ src/
 └── test_data_service.py  # Tests for data service
 ```
 
-## Technical Features
+## Tech Stack
 
-- **Real-time Financial Data**: Uses yfinance API to fetch current market data
-- **Efficient Caching**: Implements caching with per-entry expiration (max 1 week)
-- **Rate Limit Handling**: Includes backoff retry mechanism for API rate limits
-- **NaN Value Handling**: Properly sanitizes NaN values in JSON responses
-- **LLM Integration**: Uses Hugging Face Inference API for conversational responses
+- Python: Core programming language
+- Flask: Web framework
+- Pandas & NumPy: Data processing
+- scikit-learn: Machine learning models
+- yfinance: Financial data API
+- OpenAI API: LLM for chat
+- Modern responsive front-end with HTML, CSS, and JavaScript
 
-## Dependencies
+## Getting Started
 
-- Python 3.8+
-- Flask - Web framework
-- yfinance - Financial data API
-- pandas - Data manipulation
-- numpy - Numerical processing
-- HuggingFace Inference API - LLM for chat
+1. Clone this repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Configure your API keys in `.env`:
+
+```
+OPENAI_API_KEY=your_openai_api_key
+SECRET_KEY=your_flask_secret_key
+```
 
 ## Environment Variables
 
 Required environment variables (set in .env file):
 ```
 SECRET_KEY=your_flask_secret_key
-HUGGINGFACE_API_KEY=your_huggingface_api_key
 API_TIMEOUT=30
 MAX_PORTFOLIO_SIZE=25
 PORT=8080
@@ -85,6 +88,6 @@ python src/test_data_service.py
 ## Development Notes
 
 - The financial data service implements exponential backoff for API rate limiting
-- All cache entries expire after a maximum of one week
+- All cache entries expire after a maximum of 30 days
 - Error handling returns empty structures rather than failing
 - Input validation is performed for all API requests 

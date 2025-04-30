@@ -48,10 +48,10 @@ class GoldAllocationModel:
                 with open(self.cache_file, "r") as f:
                     cache_data = json.load(f)
 
-                # Check if cache is less than 24 hours old
+                # Check if cache is less than 30 days old
                 if "timestamp" in cache_data:
                     cache_time = datetime.fromtimestamp(cache_data["timestamp"])
-                    if datetime.now() - cache_time < timedelta(hours=24):
+                    if datetime.now() - cache_time < timedelta(hours=720):
                         logger.info("Using gold data from cache")
                         return cache_data
                     else:
