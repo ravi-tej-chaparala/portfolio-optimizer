@@ -6,6 +6,7 @@ import logging
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from curl_cffi import requests
 
 logger = logging.getLogger(__name__)
 
@@ -88,6 +89,9 @@ class BondAllocationModel:
 
         self.models = {}  # Cache for trained models
 
+        # Create curl_cffi session
+        self.session = requests.Session(impersonate="chrome")
+
     def _get_interest_rate_environment(self) -> str:
         """
         Determine the current interest rate environment based on yield curve.
@@ -98,7 +102,7 @@ class BondAllocationModel:
         try:
             # Get 3-month Treasury rate
             try:
-                short_rate = yf.Ticker("^IRX")
+                short_rate = yf.Ticker("^IRX", session=self.session)
                 short_hist = short_rate.history(
                     period="1mo"
                 )  # Changed from "6m" to "1mo"
@@ -111,7 +115,7 @@ class BondAllocationModel:
 
             # Get 10-year Treasury rate
             try:
-                long_rate = yf.Ticker("^TNX")
+                long_rate = yf.Ticker("^TNX", session=self.session)
                 long_hist = long_rate.history(
                     period="1mo"
                 )  # Changed from "6m" to "1mo"
@@ -127,11 +131,11 @@ class BondAllocationModel:
                 logger.info("Using ETFs as proxies for interest rate trends")
                 try:
                     # SHY (1-3 year Treasury ETF) price movement as short-term rate proxy
-                    shy = yf.Ticker("SHY")
+                    shy = yf.Ticker("SHY", session=self.session)
                     shy_hist = shy.history(period="3mo")
 
                     # TLT (20+ year Treasury ETF) price movement as long-term rate proxy
-                    tlt = yf.Ticker("TLT")
+                    tlt = yf.Ticker("TLT", session=self.session)
                     tlt_hist = tlt.history(period="3mo")
 
                     if not shy_hist.empty and not tlt_hist.empty:
@@ -203,7 +207,7 @@ class BondAllocationModel:
             pd.DataFrame: Historical price data
         """
         try:
-            etf = yf.Ticker(ticker)
+            etf = yf.Ticker(ticker, session=self.session)
             hist = etf.history(period=period)
 
             if hist.empty:
@@ -364,7 +368,7 @@ class BondAllocationModel:
                 # Get appropriate Treasury rate data based on bond type
                 if ticker in ["SHY", "VGSH", "SPSB", "VCSH", "SHM", "SHYG", "SJNK"]:
                     # Short-term bonds - use 3-month rate
-                    rate = yf.Ticker("^IRX")
+                    rate = yf.Ticker("^IRX", session=self.session)
                     rate_data = rate.history(period="2y")
                 elif ticker in [
                     "IEF",
@@ -377,11 +381,11 @@ class BondAllocationModel:
                     "JNK",
                 ]:
                     # Intermediate-term bonds - use 5-year rate
-                    rate = yf.Ticker("^FVX")
+                    rate = yf.Ticker("^FVX", session=self.session)
                     rate_data = rate.history(period="2y")
                 else:
                     # Long-term bonds - use 10-year rate
-                    rate = yf.Ticker("^TNX")
+                    rate = yf.Ticker("^TNX", session=self.session)
                     rate_data = rate.history(period="2y")
             except Exception as e:
                 logger.warning(f"Error getting rate data for {ticker}: {str(e)}")
@@ -431,7 +435,7 @@ class BondAllocationModel:
             Dict: ETF data and metrics
         """
         try:
-            etf = yf.Ticker(ticker)
+            etf = yf.Ticker(ticker, session=self.session)
             hist = etf.history(period="1y")
             info = etf.info
 

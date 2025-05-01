@@ -64,13 +64,28 @@ class CustomJSONEncoder(json.JSONEncoder):
 def init_portfolio_model():
     """Initialize the portfolio model."""
     try:
-        from models.portfolio_model import PortfolioModel
+        # Import using absolute imports
+        from src.models.portfolio_model import PortfolioModel
 
         logger.info("Portfolio model initialized successfully")
         return PortfolioModel()
     except ImportError as e:
         logger.error(f"Failed to import PortfolioModel: {str(e)}")
-        return None
+        # Try alternative import paths
+        try:
+            import sys
+            # Add project root to path if needed
+            project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+            if project_root not in sys.path:
+                sys.path.insert(0, project_root)
+            
+            # Try importing with a more direct path
+            from models.portfolio_model import PortfolioModel
+            logger.info("Portfolio model initialized with alternative import")
+            return PortfolioModel()
+        except ImportError as e2:
+            logger.error(f"Failed to import with alternative method: {str(e2)}")
+            return None
     except Exception as e:
         logger.error(f"Failed to initialize PortfolioModel: {str(e)}")
         logger.error(traceback.format_exc())
@@ -102,10 +117,28 @@ def init_openai_client():
 def init_data_service():
     """Initialize the financial data service."""
     try:
-        from utils.data_service import financial_data_service
+        # Import using absolute imports
+        from src.utils.data_service import financial_data_service
 
         logger.info("Data service initialized successfully")
         return financial_data_service
+    except ImportError as e:
+        logger.error(f"Failed to import data service: {str(e)}")
+        # Try alternative import paths
+        try:
+            import sys
+            # Add project root to path if needed
+            project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+            if project_root not in sys.path:
+                sys.path.insert(0, project_root)
+            
+            # Try importing with a more direct path
+            from utils.data_service import financial_data_service
+            logger.info("Data service initialized with alternative import")
+            return financial_data_service
+        except ImportError as e2:
+            logger.error(f"Failed to import with alternative method: {str(e2)}")
+            return None
     except Exception as e:
         logger.error(f"Failed to initialize data service: {str(e)}")
         logger.error(traceback.format_exc())

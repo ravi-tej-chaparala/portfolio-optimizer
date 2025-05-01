@@ -4,6 +4,7 @@ import yfinance as yf
 from scipy.optimize import minimize
 import logging
 import traceback
+from curl_cffi import requests
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +22,8 @@ class MPTAllocationModel:
             'crypto': 'BTC-USD', # Bitcoin
             'gold': 'GC=F'      # Gold Futures
         }
+        # Initialize with a session for yfinance
+        self.session = requests.Session(impersonate="chrome")
     
     def _get_risk_free_rate(self) -> float:
         """
@@ -30,7 +33,7 @@ class MPTAllocationModel:
             float: Current risk-free rate
         """
         try:
-            tbill = yf.Ticker('^IRX')  # 13-week Treasury bill
+            tbill = yf.Ticker('^IRX', session=self.session)  # 13-week Treasury bill
             hist = tbill.history(period="1d")
             if not hist.empty:
                 return hist['Close'].iloc[-1] / 100  # Convert to decimal
@@ -52,7 +55,7 @@ class MPTAllocationModel:
         try:
             data = {}
             for asset, symbol in self.assets.items():
-                ticker = yf.Ticker(symbol)
+                ticker = yf.Ticker(symbol, session=self.session)
                 hist = ticker.history(period=period)
                 if not hist.empty:
                     data[asset] = hist['Close'].pct_change().dropna()

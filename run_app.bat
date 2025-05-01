@@ -13,7 +13,7 @@ set PYTHONUNBUFFERED=1
 set PYTHONDONTWRITEBYTECODE=1
 set PYTHONHTTPSVERIFY=0
 set PORTFOLIO_APP_ENV=production
-set PYTHONPATH=%CD%\src
+set PYTHONPATH=%CD%
 
 echo Checking for dependencies...
 pip freeze | findstr "yfinance" >nul
@@ -26,8 +26,7 @@ echo Creating cache directory...
 if not exist "src\cache" mkdir src\cache
 
 echo Starting the app...
-cd src\web
-python -W ignore::UserWarning -W ignore::FutureWarning -W ignore::DeprecationWarning app.py
+python -W ignore::UserWarning -W ignore::FutureWarning -W ignore::DeprecationWarning src/web/app.py
 
 echo.
 echo App stopped.

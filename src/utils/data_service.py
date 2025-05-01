@@ -12,6 +12,7 @@ import os
 import sys
 from typing import Dict, List, Optional, Any, Union, Callable
 from datetime import datetime, timedelta
+from curl_cffi import requests
 
 # Add parent directory to path to enable relative imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -36,6 +37,8 @@ class FinancialDataService:
         # Max retry parameters
         self.max_retries = 3
         self.retry_backoff_factor = 2.0
+        # Create a session with curl_cffi
+        self.session = requests.Session(impersonate="chrome")
     
     def _respect_rate_limit(self) -> bool:
         """
@@ -158,7 +161,7 @@ class FinancialDataService:
         
         for symbol in symbols:
             try:
-                ticker = yf.Ticker(symbol)
+                ticker = yf.Ticker(symbol, session=self.session)
                 
                 # If custom validation function provided, use it
                 if validation_func and callable(validation_func):
@@ -197,7 +200,7 @@ class FinancialDataService:
         # If not in cache, fetch from API with retries
         try:
             def fetch_data():
-                ticker = yf.Ticker(symbol)
+                ticker = yf.Ticker(symbol, session=self.session)
                 history = ticker.history(period=period)
                 
                 if history.empty:
@@ -238,7 +241,7 @@ class FinancialDataService:
         # If not in cache, fetch from API with retries
         try:
             def fetch_info():
-                ticker = yf.Ticker(symbol)
+                ticker = yf.Ticker(symbol, session=self.session)
                 info = ticker.info
                 
                 if not info:
@@ -422,7 +425,7 @@ class FinancialDataService:
         # If not in cache, fetch from API with retries
         try:
             def fetch_rate():
-                ticker = yf.Ticker(symbol)
+                ticker = yf.Ticker(symbol, session=self.session)
                 hist = ticker.history(period="1d")
                 
                 if hist.empty:
@@ -466,7 +469,7 @@ class FinancialDataService:
         try:
             def compute_metrics():
                 # Get historical data and ticker info
-                ticker = yf.Ticker(symbol)
+                ticker = yf.Ticker(symbol, session=self.session)
                 hist = ticker.history(period="1y")
                 info = ticker.info
                 
@@ -551,7 +554,7 @@ class FinancialDataService:
                 sentiment_data = {}
                 
                 for name, symbol in indices.items():
-                    ticker = yf.Ticker(symbol)
+                    ticker = yf.Ticker(symbol, session=self.session)
                     history = ticker.history(period="1mo")
                     
                     if history.empty:

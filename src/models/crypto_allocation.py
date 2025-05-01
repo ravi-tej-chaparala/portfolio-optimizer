@@ -12,6 +12,7 @@ import time
 import random
 import os
 import json
+from curl_cffi import requests as curl_requests
 
 logger = logging.getLogger(__name__)
 
@@ -73,6 +74,9 @@ class CryptoAllocationModel:
     
         # Load cached data if available
         self._load_cache()
+    
+        # Create curl_cffi session
+        self.session = curl_requests.Session(impersonate="chrome")
     
     def _respect_rate_limit(self):
         """
@@ -158,7 +162,7 @@ class CryptoAllocationModel:
             self._respect_rate_limit()
             
             # Get data from Yahoo Finance
-            ticker = yf.Ticker(symbol)
+            ticker = yf.Ticker(symbol, session=self.session)
             hist = ticker.history(period=period)
             
             if hist.empty:

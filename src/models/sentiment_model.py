@@ -7,6 +7,7 @@ import requests
 from datetime import datetime, timedelta
 import pandas as pd
 import traceback
+from curl_cffi import requests
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +27,16 @@ class SentimentModel:
                 device=-1  # Use CPU
             )
             logger.info("Sentiment analysis model initialized successfully")
+            self.indices = {
+                "S&P 500": "^GSPC",
+                "Nasdaq": "^IXIC", 
+                "Dow Jones": "^DJI",
+                "VIX": "^VIX",
+                "Russell 2000": "^RUT"
+            }
+            self.lookback_periods = [7, 14, 30, 90]  # days
+            # Create curl_cffi session
+            self.session = requests.Session(impersonate="chrome")
         except Exception as e:
             logger.error(f"Error initializing sentiment analysis model: {str(e)}")
             raise
@@ -42,7 +53,7 @@ class SentimentModel:
             Dict[str, float]: Market metrics
         """
         try:
-            ticker = yf.Ticker(symbol)
+            ticker = yf.Ticker(symbol, session=self.session)
             hist = ticker.history(period=period)
             
             if hist.empty:

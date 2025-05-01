@@ -1,13 +1,14 @@
 import yfinance as yf
 import pandas as pd
 import numpy as np
-from typing import Dict
+from typing import Dict, List, Any
 import logging
 import time
 import random
 import os
 import json
 from datetime import datetime, timedelta
+from curl_cffi import requests
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +29,8 @@ class GoldAllocationModel:
         self.cache = self._load_cache()
         self.api_calls = 0
         self.max_api_calls = 25  # Maximum API calls before using fallback
+        # Create curl_cffi session
+        self.session = requests.Session(impersonate="chrome")
 
     def _respect_rate_limit(self):
         """Add delay between API calls and track call count to avoid rate limiting"""
@@ -87,9 +90,9 @@ class GoldAllocationModel:
             if not self._respect_rate_limit():
                 return 0.03  # Default moderate inflation value
 
-            # Get TIP (inflation-protected) and IEF (treasury) ETFs
-            tip = yf.Ticker("TIP")
-            ief = yf.Ticker("IEF")
+            # Get TIP (Treasury Inflation-Protected Securities) and IEF (7-10 Year Treasury) data
+            tip = yf.Ticker("TIP", session=self.session)
+            ief = yf.Ticker("IEF", session=self.session)
 
             # Get historical data for last 3 months
             tip_data = tip.history(period="3mo")
@@ -145,8 +148,8 @@ class GoldAllocationModel:
                 return {"current_ratio": 0.5, "ratio_change": 0.02}  # Default values
 
             # Get gold ETF (GLD) and S&P 500 ETF (SPY)
-            gld = yf.Ticker("GLD")
-            spy = yf.Ticker("SPY")
+            gld = yf.Ticker("GLD", session=self.session)
+            spy = yf.Ticker("SPY", session=self.session)
 
             # Get historical data for last 6 months
             gld_data = gld.history(period="6mo")
@@ -196,7 +199,7 @@ class GoldAllocationModel:
                 }  # Default values
 
             # Get VIX data
-            vix = yf.Ticker("^VIX")
+            vix = yf.Ticker("^VIX", session=self.session)
             vix_data = vix.history(period="1mo")
 
             if len(vix_data) == 0:

@@ -12,6 +12,10 @@ import random
 import os
 import json
 import traceback
+from curl_cffi import requests
+
+from src.config.settings import RISK_PROFILES, ASSETS
+from src.utils.cache_utils import CACHE_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +48,9 @@ class StockAllocationModel:
         
         # Load cached data if available
         self._load_cache()
+        
+        # Create curl_cffi session
+        self.session = requests.Session(impersonate="chrome")
     
     def _get_sector_stocks(self) -> Dict[str, List[str]]:
         """
@@ -53,21 +60,8 @@ class StockAllocationModel:
             Dict[str, List[str]]: Stocks grouped by sector
         """
         try:
-            # Instead of trying to get S&P 500 components dynamically (which is causing errors),
-            # use a predefined list of major stocks by sector
-            predefined_sectors = {
-                'Technology': ['AAPL', 'MSFT', 'NVDA', 'GOOGL', 'META'],
-                'Healthcare': ['JNJ', 'PFE', 'UNH', 'ABBV', 'MRK'],
-                'Financial': ['JPM', 'BAC', 'WFC', 'GS', 'V'],
-                'Consumer Cyclical': ['AMZN', 'TSLA', 'HD', 'MCD', 'NKE'],
-                'Communication Services': ['NFLX', 'DIS', 'CMCSA', 'VZ', 'T'],
-                'Industrial': ['HON', 'UNP', 'UPS', 'CAT', 'BA'],
-                'Consumer Defensive': ['PG', 'KO', 'PEP', 'WMT', 'COST'],
-                'Energy': ['XOM', 'CVX', 'COP', 'SLB', 'EOG'],
-                'Utilities': ['NEE', 'DUK', 'SO', 'D', 'AEP'],
-                'Basic Materials': ['LIN', 'APD', 'ECL', 'NEM', 'FCX'],
-                'Real Estate': ['AMT', 'PLD', 'CCI', 'EQIX', 'PSA']
-            }
+            # Use the predefined sectors from settings.py
+            predefined_sectors = ASSETS['stocks']['sectors']
             
             # If we're rate limited, return a much smaller set to reduce API calls
             if self.rate_limited:
@@ -92,7 +86,7 @@ class StockAllocationModel:
                         # Apply rate limiting
                         self._respect_rate_limit()
                         
-                        ticker = yf.Ticker(symbol)
+                        ticker = yf.Ticker(symbol, session=self.session)
                         # Do a simple validation by getting a small amount of history
                         hist = ticker.history(period="5d")
                         if not hist.empty:
@@ -200,7 +194,7 @@ class StockAllocationModel:
             # Apply rate limiting
             self._respect_rate_limit()
             
-            ticker = yf.Ticker(symbol)
+            ticker = yf.Ticker(symbol, session=self.session)
             hist = ticker.history(period=period)
             
             if hist.empty:
@@ -386,7 +380,7 @@ class StockAllocationModel:
             Dict: Stock metrics and data
         """
         try:
-            ticker = yf.Ticker(symbol)
+            ticker = yf.Ticker(symbol, session=self.session)
             info = ticker.info
             hist = ticker.history(period="1y")
             
@@ -524,7 +518,7 @@ class StockAllocationModel:
         """
         try:
             # Fetch ticker info
-            ticker = yf.Ticker(symbol)
+            ticker = yf.Ticker(symbol, session=self.session)
             info = ticker.info
             
             # Calculate return metrics
