@@ -1600,3 +1600,76 @@ table td {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Add styles for the new chart containers at an appropriate location */
+
+/* Portfolio Analysis Charts */
+.chart-container-lg {
+    height: 350px;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Custom styling for chart tabs */
+#portfolio-charts-tabs {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#portfolio-charts-tabs .nav-link {
+    color: #8c8c8c;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#portfolio-charts-tabs .nav-link:hover {
+    color: #e0e0e0;
+}
+
+#portfolio-charts-tabs .nav-link.active {
+    color: #3a9ffb;
+    background: transparent;
+    border-bottom: 2px solid #3a9ffb;
+}
+
+#portfolio-charts-content {
+    padding: 1.5rem 0;
+}
+
+/* Chart tooltips */
+.custom-chart-tooltip {
+    background-color: rgba(26, 32, 44, 0.9);
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    pointer-events: none;
+    max-width: 200px;
+}
+
+.tooltip-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tooltip-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.tooltip-value {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+.tooltip-label {
+    margin-right: 8px;
+}

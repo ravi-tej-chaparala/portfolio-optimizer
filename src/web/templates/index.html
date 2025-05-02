@@ -270,6 +270,43 @@
                             </div>
                         </div>
 
+                        <!-- Additional Portfolio Visualizations -->
+                        <div class="section-container mb-4">
+                            <h3 class="section-title"><i class="bi bi-graph-up"></i> Portfolio Analysis</h3>
+                            
+                            <!-- Navigation tabs for charts -->
+                            <ul class="nav nav-tabs mb-3" id="portfolio-charts-tabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="performance-tab" data-bs-toggle="tab" data-bs-target="#performance-chart" type="button" role="tab">Historical Performance</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="risk-return-tab" data-bs-toggle="tab" data-bs-target="#risk-return-chart" type="button" role="tab">Risk/Return</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="projection-tab" data-bs-toggle="tab" data-bs-target="#projection-chart" type="button" role="tab">Performance Projection</button>
+                                </li>
+                            </ul>
+                            
+                            <!-- Chart content -->
+                            <div class="tab-content" id="portfolio-charts-content">
+                                <div class="tab-pane fade show active" id="performance-chart" role="tabpanel">
+                                    <div class="chart-container-lg">
+                                        <canvas id="historicalPerformanceChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="risk-return-chart" role="tabpanel">
+                                    <div class="chart-container-lg">
+                                        <canvas id="riskReturnChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="projection-chart" role="tabpanel">
+                                    <div class="chart-container-lg">
+                                        <canvas id="projectionChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Investment Recommendations -->
                         <div class="section-container">
                             <h3 class="section-title"><i class="bi bi-star"></i> Recommended Investments</h3>
